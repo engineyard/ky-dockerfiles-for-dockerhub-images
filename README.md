@@ -13,6 +13,8 @@ ruby/
 
 The above structure means that we can have images for `ruby`, `nodejs`, `php` etc and various linux distros e.g. `Alpine`, `Ubuntu`, `Debian` etc.
 
+## Parent image
+We have selected as `parent image` the  Debian's `buster` or `stretch` version that offer LTS support that covers our needs until June 2022 ([source](https://en.wikipedia.org/wiki/Debian_version_history))
 ## Versioning 
 The images that are uploaded to Docker Hub follow the Semantic Versioning.
 
