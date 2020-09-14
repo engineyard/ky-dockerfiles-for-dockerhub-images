@@ -1,0 +1,25 @@
+FROM debian:stretch-20200803-slim
+
+ENV RUBY_VERSION 2.0.0-p648
+ENV PATH /usr/local/rvm/gems/ruby-${RUBY_VERSION}/bin:/usr/local/rvm/gems/ruby-${RUBY_VERSION}0@global/bin:/usr/local/rvm/rubies/ruby-${RUBY_VERSION}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/rvm/bin
+
+
+RUN apt-get update && apt-get -y install bash procps curl gcc bzip2 libxml2-dev libxslt-dev linux-headers-amd64 tzdata git libcurl4-openssl-dev libpcre3-dev patch zlib1g-dev liblzma-dev build-essential libpq-dev libmariadb-dev  && apt-get clean 
+
+RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB && \
+    curl -sSL https://get.rvm.io | bash -s stable --ruby=${RUBY_VERSION} && \
+    gem update --system 2.7.10
+  
+WORKDIR /tmp
+RUN NODE_FILENAME=`curl -L -s https://nodejs.org/dist/latest-v12.x | grep 'linux-x64.tar.gz' | grep -oP '(?<=")\S*(?=")'` && \
+    NODE_VERSION_TO_INSTALL=`curl -L -s https://nodejs.org/dist/latest-v12.x | grep 'linux-x64.tar.gz' | grep -oP '(?<=")\S*(?=")' | grep -oP '^\S*(?=.tar.gz)'` && \
+    curl -o $NODE_FILENAME "https://nodejs.org/dist/latest-v12.x/${NODE_FILENAME}" && \
+    curl -o SHASUMS256.txt https://nodejs.org/dist/latest-v12.x/SHASUMS256.txt && \
+    grep $NODE_FILENAME SHASUMS256.txt | sha256sum -c - && \
+    mkdir -p /opt/nodejs && \
+    tar -xf $NODE_FILENAME -C /opt/nodejs/ && \
+    rm -rf /tmp/* && \
+    ln -s /opt/nodejs/$NODE_VERSION_TO_INSTALL/bin/node /usr/bin/node && \
+    ln -s /opt/nodejs/$NODE_VERSION_TO_INSTALL/bin/npm /usr/bin/npm 
+
+CMD ["irb"]
