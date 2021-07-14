@@ -28,4 +28,4 @@ The steps followed are:
 5. create an image tag to upload: `docker build --no-cache --file ./ruby/2.5.8/slim-buster/Dockerfile.ruby_2.5.8_debian_slim_buster -t engineyard/kontainers:ruby-2.5-v1.0.0 .`
 6. push the image to Docker Hub: `docker push engineyard/kontainers:ruby-2.5-v1.0.0`
 7. submit a PR and mark Rupika, Dennis, or Daniel for review.
-8. upon acceptance, updated the 'Supported Tags' section at [DockerHub](https://hub.docker.com/repository/docker/engineyard/kontainers)
+8. upon acceptance, updated the 'Supported Tags' section at [DockerHub](https://hub.docker.com/repository/docker/engineyard/kontainers) to point to the updated image.
