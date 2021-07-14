@@ -21,8 +21,10 @@ The images that are uploaded to Docker Hub follow the Semantic Versioning.
 ## Process
 The steps followed are:
 
-1. create a new Dockerfile e.g. `ruby/2.5.8/debian/slim-buster/Dockerfile.ruby_2.5.8_debian_slim_buster`
-2. build the image locally: `docker build --file ./ruby/2.5.8/debian/slim-buster/Dockerfile.ruby_2.5.8_debian_slim_buster --tag=ruby_2.5.8_debian_slim_buster .`
-3. test the image: `docker run --rm -ti ruby_2.5.8_debian_slim_buster /bin/bash`
-4. create an image tag to upload: `docker build --no-cache --file ./ruby/2.5.8/slim-buster/Dockerfile.ruby_2.5.8_debian_slim_buster -t engineyard/kontainers:ruby-2.5-v1.0.0 .`
-5. push the image to Docker Hub: `docker push engineyard/kontainers:ruby-2.5-v1.0.0`
+1. create a branch for the work to do, following the convention of `fbz-xyzd-description`
+2. create a new Dockerfile e.g. `ruby/2.5.8/debian/slim-buster/Dockerfile.ruby_2.5.8_debian_slim_buster`
+3. build the image locally: `docker build --file ./ruby/2.5.8/debian/slim-buster/Dockerfile.ruby_2.5.8_debian_slim_buster --tag=ruby_2.5.8_debian_slim_buster .`
+4. test the image: `docker run --rm -ti ruby_2.5.8_debian_slim_buster /bin/bash`
+5. create an image tag to upload: `docker build --no-cache --file ./ruby/2.5.8/slim-buster/Dockerfile.ruby_2.5.8_debian_slim_buster -t engineyard/kontainers:ruby-2.5-v1.0.0 .`
+6. push the image to Docker Hub: `docker push engineyard/kontainers:ruby-2.5-v1.0.0`
+7. submit a PR and mark Rupika, Dennis, or Daniel for review.
