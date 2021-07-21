@@ -11,8 +11,9 @@ RUN printf "deb http://security.ubuntu.com/ubuntu bionic-security main\n" >> /et
 RUN apt-get update 
 
 RUN gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB && \
-    curl -sSL https://get.rvm.io | bash -s stable --ruby=${RUBY_VERSION} --without-gems="rubygems"
-RUN gem update --system 2.7.9
+    curl -sSL https://get.rvm.io | bash -s -- --version 1.29.7
+RUN rvm reload
+RUN rvm install 1.9.3 --rubygems 2.7.9
   
 WORKDIR /tmp
 RUN NODE_FILENAME=`curl -L -s https://nodejs.org/dist/v4.2.1 | grep 'linux-x64.tar.gz' | grep -oP '(?<=")\S*(?=")'` && \
