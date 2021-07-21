@@ -10,8 +10,7 @@ RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 3B4FE6ACC0B21F32
 RUN printf "deb http://security.ubuntu.com/ubuntu bionic-security main\n" >> /etc/apt/sources.list
 RUN apt-get update 
 
-RUN wget https://www.openssl.org/source/openssl-1.0.2l.tar.gz && tar -xzf openssl-1.0.2l.tar.gz 
-RUN cd openssl-1.0.21
+RUN wget https://www.openssl.org/source/openssl-1.0.2l.tar.gz && tar -xzf openssl-1.0.2l.tar.gz && cd openssl-1.0.2l
 RUN ./config --prefix=/opt/old-ssl shared && make && make install
 
 
