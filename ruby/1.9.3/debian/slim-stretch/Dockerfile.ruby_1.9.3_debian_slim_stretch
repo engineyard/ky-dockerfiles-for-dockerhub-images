@@ -3,11 +3,10 @@ FROM debian:stretch-20200803-slim
 ENV RUBY_VERSION 1.9.3-p551
 ENV PATH /usr/local/rvm/gems/ruby-${RUBY_VERSION}/bin:/usr/local/rvm/gems/ruby-${RUBY_VERSION}0@global/bin:/usr/local/rvm/rubies/ruby-${RUBY_VERSION}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/rvm/bin
 
+RUN apt-get update && apt-get -y install bash procps curl gcc bzip2 libxml2-dev libxslt-dev linux-headers-amd64 tzdata git libcurl4-openssl-dev libpcre3-dev patch zlib1g-dev liblzma-dev build-essential libpq-dev libmariadb-dev  && apt-get clean 
 RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 3B4FE6ACC0B21F32
 RUN printf "deb http://security.ubuntu.com/ubuntu bionic-security main\n" > /etc/apt/sources.list
-RUN apt-get update && apt-get -y install bash procps curl gcc bzip2 libxml2-dev libxslt-dev linux-headers-amd64 tzdata git libcurl4-openssl-dev libpcre3-dev patch zlib1g-dev liblzma-dev build-essential libpq-dev libmariadb-dev  && apt-get clean 
-
-RUN rvm get head
+RUN apt-get update && rvm get head
 
 RUN gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB && \
     curl -sSL https://get.rvm.io | bash -s stable --ruby=${RUBY_VERSION} && \
