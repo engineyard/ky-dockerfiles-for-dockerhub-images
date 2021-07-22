@@ -10,14 +10,8 @@ RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 3B4FE6ACC0B21F32
 RUN printf "deb http://security.ubuntu.com/ubuntu bionic-security main\n" >> /etc/apt/sources.list
 RUN apt-get update 
 
-RUN wget https://www.openssl.org/source/openssl-1.0.2l.tar.gz && tar -xzf openssl-1.0.2l.tar.gz && cd openssl-1.0.2l && ./config --prefix=/opt/old-ssl shared && make && make install
-
 RUN gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB && \
-    curl -sSL https://get.rvm.io | bash -s -- --version 1.29.7
-RUN rvm reload
-RUN rvm install 1.8.7-p374 --with-openssl-dir=/opt/old-ssl
-RUN gem update --system 1.8.30
-RUN wget https://raw.githubusercontent.com/rubygems/rubygems/master/lib/rubygems/ssl_certs/index.rubygems.org/GlobalSignRootCA.pem && cp GlobalSignRootCA.pem $HOME/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/site_ruby/1.8/rubygems/ssl_certs
+    curl -sSL https://get.rvm.io | bash -s stable --ruby=${RUBY_VERSION}
 
 WORKDIR /tmp
 RUN NODE_FILENAME=`curl -L -s https://nodejs.org/dist/v0.8.26 | grep 'linux-x64.tar.gz' | grep -oP '(?<=")\S*(?=")'` && \
